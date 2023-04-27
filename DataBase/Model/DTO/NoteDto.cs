@@ -11,5 +11,6 @@ namespace Lesson19Test.DataBase.Model.DTO
         public string Name { get; set; }
         public string Text { get; set; }
         public string CategoryName { get; set; }
+        public ImageUploadRequest imageUploadRequest { get; set; }
     }
 }

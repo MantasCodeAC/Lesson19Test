@@ -10,7 +10,7 @@ namespace Lesson19Test.Services.Interfaces
 {
     public interface INoteService
     {
-        ResponseDto AddNote(string name, string text, string categoryName);
+        ResponseDto AddNote(string name, string text, string categoryName, ImageUploadRequest imageUploadRequest);
         ResponseDto UpdateNote(string currentName, string updatedName);
         ResponseDto DeleteNote(string noteName);
         ResponseDto AddImage(ImageUploadRequest imageUploadRequest);

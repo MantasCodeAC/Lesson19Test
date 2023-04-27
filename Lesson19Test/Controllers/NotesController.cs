@@ -16,9 +16,9 @@ namespace Lesson19Test.Controllers
             _noteService = noteService;
         }
         [HttpPost("CreateNote")]
-        public ActionResult<ResponseDto> CreateNote([FromBody] NoteDto noteDto)
+        public ActionResult<ResponseDto> CreateNote([FromForm] NoteDto noteDto)
         {
-            var response = _noteService.AddNote(noteDto.Name, noteDto.Text, noteDto.CategoryName);
+            var response = _noteService.AddNote(noteDto.Name, noteDto.Text, noteDto.CategoryName, noteDto.imageUploadRequest);
             if (!response.IsSuccess)
                 return BadRequest(response.Message);
             return response;

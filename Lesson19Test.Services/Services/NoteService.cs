@@ -23,12 +23,19 @@ namespace Lesson19Test.Services.Services
             _repository = repository;
             _httpContextAccessor = httpContextAccessor;
         }
-        public ResponseDto AddNote(string name, string text, string categoryName)
+        public ResponseDto AddNote(string name, string text, string categoryName, ImageUploadRequest imageUploadRequest)
         {
             var existingNote = _repository.GetNote(name);
             if (existingNote is not null)
                 return new ResponseDto(false, "Note with this name already exists");
             Note note = CreateNote(name, text, categoryName);
+            Image image = CreateImage(imageUploadRequest);
+            if(image != null)
+            {
+                ImageAndNote imageAndNote = CreateImageAndNote(name, image.Name);
+                note.ImageAndNote.Add(imageAndNote);
+                
+            }
             if (note is null)
                 return new ResponseDto(false, $"The category name doesn't exist");
             _repository.AddNote(note);
@@ -68,7 +75,7 @@ namespace Lesson19Test.Services.Services
                 Name = name,
                 Text = text,
                 CategoryId = tryCategory.Id,
-
+                ImageAndNote = new List<ImageAndNote>()
             };
             return note;
         }
